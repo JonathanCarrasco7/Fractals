@@ -35,7 +35,7 @@ def draw(axiom, d=D, l=L):
     """
     stack  = []                 # Tracks the turtle's position
     screen = turtle.Screen()
-    Jonathan   = turtle.Turtle()
+    Jonathan = turtle.Turtle()
 
     Jonathan.hideturtle()           # Doesn't show the turtle
     Jonathan.speed(0)               # Makes the turtle faster
@@ -45,7 +45,7 @@ def draw(axiom, d=D, l=L):
         c = axiom[i]
 
         if c == 'F':
-            alex.forward(l)
+            Jonathan.forward(l)
 
         if c == 'f':
             Jonathan.penup()
@@ -96,3 +96,14 @@ if __name__ == '__main__':
 
     def Tree(t, order, size):
         pass
+
+    window = turtle.Screen()
+    t = turtle.Turtle()
+
+    def koch(t, order, size):
+        if order == 0:
+            t.forward(size)
+        else:
+            for angle in [60, -120, 60, 0]:
+               koch(t, order-1, size/3)
+               t.left(angle)
