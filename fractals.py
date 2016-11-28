@@ -35,11 +35,11 @@ def draw(axiom, d=D, l=L):
     """
     stack  = []                 # Tracks the turtle's position
     screen = turtle.Screen()
-    alex   = turtle.Turtle()
+    Jonathan   = turtle.Turtle()
 
-    alex.hideturtle()           # Doesn't show the turtle
-    alex.speed(0)               # Makes the turtle faster
-    alex.left(90)               # Points upwards instead of rightwards
+    Jonathan.hideturtle()           # Doesn't show the turtle
+    Jonathan.speed(0)               # Makes the turtle faster
+    Jonathan.left(90)               # Points upwards instead of rightwards
 
     for i in xrange(len(axiom)):
         c = axiom[i]
@@ -48,25 +48,25 @@ def draw(axiom, d=D, l=L):
             alex.forward(l)
 
         if c == 'f':
-            alex.penup()
-            alex.forward(l)
-            alex.pendown()
+            Jonathan.penup()
+            Jonathan.forward(l)
+            Jonathan.pendown()
 
         if c == '+':
-            alex.left(d)
+            Jonathan.left(d)
 
         if c == '-':
-            alex.right(d)
+            Jonathan.right(d)
 
         if c == '[':
-            stack.append((alex.heading(), alex.pos()))
+            stack.append((Jonathan.heading(), Jonathan.pos()))
 
         if c == ']':
             heading, position = stack.pop()
-            alex.penup()
-            alex.goto(position)
-            alex.setheading(heading)
-            alex.pendown()
+            Jonathan.penup()
+            Jonathan.goto(position)
+            Jonathan.setheading(heading)
+            Jonathan.pendown()
 
     screen.onkey(screen.bye, 'q')
     screen.listen()
