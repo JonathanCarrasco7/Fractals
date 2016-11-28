@@ -22,24 +22,24 @@ def iterate(axiom, num=0, initator='F'):
                 result += axiom
         return result
 
-    # Set initator
+    # Sets initator
     result = initator
     for i in xrange(0, num):
-        # For ever iteration, translate the rule string
+        # Translates the rule string for each iteration
         result = translate(result, axiom)
     return result
 
 def draw(axiom, d=D, l=L):
     """
-    Use turtle to draw the L-System
+    Uses turtle to draw the L-System
     """
-    stack  = []                 # For tracking turtle positions
+    stack  = []                 # Tracks the turtle's position
     screen = turtle.Screen()
     alex   = turtle.Turtle()
 
-    alex.hideturtle()           # Don't show the turtle
-    alex.speed(0)               # Make the turtle faster
-    alex.left(90)               # Point up instead of right
+    alex.hideturtle()           # Doesn't show the turtle
+    alex.speed(0)               # Makes the turtle faster
+    alex.left(90)               # Points upwards instead of rightwards
 
     for i in xrange(len(axiom)):
         c = axiom[i]
