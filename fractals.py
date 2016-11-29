@@ -1,33 +1,37 @@
 import turtle
 
+class MyTurtle(turtle.Turtle):
+    """
+    Initiates an instance object Turtle and creates a class of usable turtle
+    slaves
+    """
 D = 90 #Turning Angle
 L = 10 #Line Length
 
-def iterate(axiom, num=0, initator='F'):
-    """
-    Compute turtle rule string by iterating on an axiom
-    """
-
-    def translate(current, axiom):
+    def iterate(axiom, num=0, initator='F'):
         """
-        Translate all the "F" with the axiom for current string
+        Compute turtle rule string by iterating on an axiom
         """
-        result = ''
-        consts = {'+', '-', '[', ']'}
-        for c in current:
-            if c in consts:
-                result += c
-                continue
-            if c == 'F':
-                result += axiom
-        return result
 
-    # Sets initator
-    result = initator
-    for i in xrange(0, num):
-        # Translates the rule string for each iteration
-        result = translate(result, axiom)
-    return result
+        def translate(current, axiom):
+            """
+            Translate all the "F" with the axiom for current string
+            """
+            result = ""
+            consts = {'+', '-', '[', ']'}
+            for c in current:
+                if c in consts:
+                    result += c
+                    continue
+                    if c == 'F':
+                        result += axiom
+            return result
+
+            # Sets initator
+            result = initator
+            for i in xrange(0, num): # Translates the rule string for each iteration
+                result = translate(result, axiom)
+            return result
 
 def draw(axiom, d=D, l=L):
     """
@@ -36,9 +40,8 @@ def draw(axiom, d=D, l=L):
     stack  = []                 # Tracks the turtle's position
     screen = turtle.Screen()
     Jonathan = turtle.Turtle()
-
     Jonathan.hideturtle()           # Doesn't show the turtle
-    Jonathan.speed(0)               # Makes the turtle faster
+    Jonathan.speed("faster")
     Jonathan.left(90)               # Points upwards instead of rightwards
 
     for i in xrange(len(axiom)):
@@ -72,12 +75,6 @@ def draw(axiom, d=D, l=L):
     screen.listen()
     turtle.mainloop()
 
-if __name__ == '__main__':
-
-    axiom = "F-F+F+FF-F-F+F"
-    axiom = iterate(axiom, 3, "F-F-F-F")
-    draw(axiom, 90, 2)
-
     """
     For a Koch Fractal:
     axiom = "F+F--F+F"
@@ -87,18 +84,6 @@ if __name__ == '__main__':
     axiom = "F[-F]F[+F]F"
     axiom = iterate(axiom, 3, "F")
     draw(axiom, 60, 10)
-    """
-    def Fibonacci(t):
-        pass
-
-    def Mandlebrot(t):
-        pass
-
-    def Tree(t, order, size):
-        pass
-
-class MyTurtle(turtle.Turtle):
-    """
     """
 
     def glow(self,x,y):
@@ -122,3 +107,9 @@ class MyTurtle(turtle.Turtle):
             for angle in [60, -120, 60, 0]:
                koch(order-1, size/3)
                t.left(angle)
+
+if __name__ == '__main__':
+
+    axiom = "F-F+F+FF-F-F+F"
+    axiom = iterate(axiom, 3, "F-F-F-F")
+    draw(axiom, 90, 2)
