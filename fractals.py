@@ -97,13 +97,28 @@ if __name__ == '__main__':
     def Tree(t, order, size):
         pass
 
-    window = turtle.Screen()
-    t = turtle.Turtle()
+class MyTurtle(turtle.Turtle):
+    """
+    """
 
-    def koch(t, order, size):
+    def glow(self,x,y):
+        self.fillcolor("red")
+
+    def unglow(self,x,y):
+        self.fillcolor("")
+
+    def koch(order, size):
+        #must be 5 < order < 1
+        window = turtle.Screen()
+        t = turtle.Turtle()
+        t.penup()
+        t.setposition(-220,200)
+        t.pendown()
+        t.pen(pencolor={},pensize=1,speed=10).format("blue")# color given
+
         if order == 0:
             t.forward(size)
         else:
             for angle in [60, -120, 60, 0]:
-               koch(t, order-1, size/3)
+               koch(order-1, size/3)
                t.left(angle)
