@@ -78,6 +78,5 @@ def main():
     draw_LSystem(t, inst, 60, 5)   # draw the picture at (angle 60, length 5)
     TurtleLand.onkey(TurtleLand.bye, 'q')
     TurtleLand.listen()
-    turtle.mainloop()
 
 main()
