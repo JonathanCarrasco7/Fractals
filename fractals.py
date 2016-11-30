@@ -1,37 +1,32 @@
 import turtle
 
-class MyTurtle(turtle.Turtle):
-    """
-    Initiates an instance object Turtle and creates a class of usable turtle
-    slaves
-    """
 D = 90 #Turning Angle
 L = 10 #Line Length
 
-    def iterate(axiom, num=0, initator='F'):
-        """
-        Compute turtle rule string by iterating on an axiom
-        """
+def iterate(axiom, num=0, initator='F'):
+    """
+    Compute turtle rule string by iterating on an axiom
+    """
 
-        def translate(current, axiom):
-            """
-            Translate all the "F" with the axiom for current string
-            """
-            result = ""
-            consts = {'+', '-', '[', ']'}
-            for c in current:
-                if c in consts:
-                    result += c
-                    continue
-                    if c == 'F':
-                        result += axiom
-            return result
+    def translate(current, axiom):
+        """
+        Translate all the "F" with the axiom for current string
+        """
+        result = ""
+        consts = {'+', '-', '[', ']'}
+        for c in current:
+            if c in consts:
+                result += c
+                continue
+                if c == 'F':
+                    result += axiom
+        return result
 
-            # Sets initator
-            result = initator
-            for i in xrange(0, num): # Translates the rule string for each iteration
-                result = translate(result, axiom)
-            return result
+        # Sets initator
+        result = initator
+        for i in xrange(0, num): # Translates the rule string for each iteration
+            result = translate(result, axiom)
+        return result
 
 def draw(axiom, d=D, l=L):
     """
@@ -74,23 +69,6 @@ def draw(axiom, d=D, l=L):
     screen.onkey(screen.bye, 'q')
     screen.listen()
     turtle.mainloop()
-
-    """
-    For a Koch Fractal:
-    axiom = "F+F--F+F"
-    axiom = iterate(axiom, 3, "F")
-    draw(axiom, 60, 10)
-    For Other fractal:
-    axiom = "F[-F]F[+F]F"
-    axiom = iterate(axiom, 3, "F")
-    draw(axiom, 60, 10)
-    """
-
-    def glow(self,x,y):
-        self.fillcolor("red")
-
-    def unglow(self,x,y):
-        self.fillcolor("")
 
     def koch(order, size):
         #must be 5 < order < 1

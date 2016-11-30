@@ -4,6 +4,14 @@ def create_LSystem(Iterations,axiom):
     """
     Creates an L-System using the axioms provided and Iterates over this L-System
     "Iterations-times" (n-times).
+    For a Koch Fractal:
+    axiom = "F-F++F-F"
+    axiom = iterate(axiom, 3, "F")
+    draw(axiom, 60, 10)
+    For Other fractal:
+    axiom = "F[+F]F[-F]F"
+    axiom = iterate(axiom, 3, "F")
+    draw(axiom, 60, 10)
     """
 
     starting_string = axiom
@@ -22,7 +30,7 @@ def process_string(old_string):
 
     new_string = ""
     for character in old_string:
-        new_stringstr = new_stringstr + apply_rules(character)
+        new_string = new_string + apply_rules(character)
 
     return new_string
 
@@ -35,7 +43,7 @@ def apply_rules(character):
     if character == 'F':
         new_string = 'F-F++F-F'   # Rule 1
     else:
-        new_stringstr = character   # no rules apply
+        new_string = character   # no rules apply
 
     return new_string
 
@@ -59,17 +67,17 @@ def main():
     The main function being passed as an example.
     """
 
-    inst = createLSystem(4, "F")   # create the string
-    print(inst)
-    t = turtle.Turtle()            # create the turtle
-    wn = turtle.Screen()
-
+    inst = create_LSystem(4, "F")
+    print("These are the instructions being iterated over" + inst)
+    t = turtle.Turtle()
+    TurtleLand = turtle.Screen()
     t.up()
     t.back(200)
     t.down()
-    t.speed(9)
-    drawLsystem(t, inst, 60, 5)   # draw the picture
-                                  # angle 60, segment length 5
-    wn.exitonclick()
+    t.speed("fastest")
+    draw_LSystem(t, inst, 60, 5)   # draw the picture at (angle 60, length 5)
+    TurtleLand.onkey(TurtleLand.bye, 'q')
+    TurtleLand.listen()
+    turtle.mainloop()
 
 main()
