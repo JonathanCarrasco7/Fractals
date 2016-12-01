@@ -6,6 +6,14 @@ L = 10 #Line Length
 def iterate(axiom, num=0, initator='F'):
     """
     Compute turtle rule string by iterating on an axiom
+    For a Koch Fractal:
+    axiom = "F-F++F-F"
+    axiom = iterate(axiom, 3, "F")
+    draw(axiom, 60, 10)
+    For Other fractal:
+    axiom = "F[+F]F[-F]F"
+    axiom = iterate(axiom, 3, "F")
+    draw(axiom, 60, 10)
     """
 
     def translate(current, axiom):
@@ -69,7 +77,7 @@ def draw(axiom, d=D, l=L):
     screen.onkey(screen.bye, 'q')
     screen.listen()
     turtle.mainloop()
-        
+
 if __name__ == '__main__':
 
     axiom = "F-F+F+FF-F-F+F"
