@@ -16,6 +16,10 @@ def create_LSystem(Iterations,axiom):
     rule = S > S+M-S-M+S , M > MM
     axiom = S+M+M
 
+    For a Fractal Plant:
+    rule = X > M-[[X]+X]+M[+MX]-X, M > MM
+    axiom = X
+
     For every code:
     fractal = create_LSystem(Iterations, "axiom")
     draw_LSystem(t, fractal, angle, distance)
@@ -54,6 +58,8 @@ def apply_rules(character):
         rule = 'S+M-S-M+S'
     elif character == 'M':
         rule = 'MM'
+    elif character == 'X':
+        rule = 'M-[[X]+X]+M[+MX]-X'
     else:
         rule = character
 
@@ -66,10 +72,12 @@ def draw_LSystem(Jonathan, instructions, angle, distance):
     stack  = []
 
     for command in instructions:
-        if command == 'F' or command == 'M' or command == 'S':
+        if command == 'F' or command == 'M' or command == 'S' or command == 'P':
             Jonathan.forward(distance)
         elif command == 'B':
             Jonathan.backward(distance)
+        elif command == 'X':
+            Jonathan.left(360)
         elif command == '+':
             Jonathan.right(angle)
         elif command == '-':
@@ -123,13 +131,21 @@ def main():
     print("Now lets try to do a Sierpinski Triangle fractal! In this case, you'll"
     " be choosing how many iterations you want instead of the angle.")
     sierpinski_iterations = input("Type in how many times you want to iterate over (between 2 and 6) ")
-    sierpinski_length = input("Now type in the length you want each line to be (not too big) ")
+    sierpinski_length = input("Now type in the length you want each line to be (between 5 and 10) ")
     create_new_turtle_enviroment()
+    t.reset()
     t.setposition(-500,0)
     print(after_instructions)
     sierpinski_instructions = create_LSystem(sierpinski_iterations, "S+M+M")
     draw_LSystem(t, sierpinski_instructions, 120, sierpinski_length)
-    print("IT WORKED")
+
+
+    print("Great! Lastly we'll be doing a fractal plant where you can chose to "
+    "iterate as many times as you want, specifying the angele and length of each"
+    "line.")
+    fractal_plant_iterations = 
+    fractal_plant_angle =
+
 
 
 #print("These are the instructions being iterated over" + "\n" + inst)
