@@ -58,8 +58,8 @@ def apply_rules(character):
         rule = 'S+M-S-M+S'
     elif character == 'M':
         rule = 'MM'
-    elif character == 'X':
-        rule = 'M-[[X]+X]+M[+MX]-X'
+    elif character == 'C':
+        rule = 'M-[[C]+C]+M[+MC]-C'
     else:
         rule = character
 
@@ -76,7 +76,7 @@ def draw_LSystem(Jonathan, instructions, angle, distance):
             Jonathan.forward(distance)
         elif command == 'B':
             Jonathan.backward(distance)
-        elif command == 'X':
+        elif command == 'C':
             Jonathan.left(360)
         elif command == '+':
             Jonathan.right(angle)
@@ -104,48 +104,69 @@ def main():
     The main function being passed as an example.
     """
     after_instructions = "Now click on the other window to view your Koch fractal being made!"
-    t.speed("fastest")
 
     print("Hello! Welcome to the world of fractals!")
     # name = '"{0}"'.format(input("What's your name? ")) #have to type in a string for some reason
     # color = '"{0}"'.format(input("Hello "+ name +" .What's your favorite color? "))
     name = input("What's your name? ")
     color = input("Hello "+ name +". What's your favorite color? ")
-    print("Sweet! The interesting thing about fractals is that they use recursion,"
-    " just as our hw5 did." + "\n" + "Here's an example of a fractal called a koch fractal,"
-    " named after the Swedish Mathematician Helge von Koch.")
+    print("Sweet! The interesting thing about fractals is that they use recursion," + "\n" +
+    "just as our hw5 did." "Here's an example of a fractal called a koch fractal," + "\n" +
+    "named after the Swedish Mathematician Helge von Koch.")
     create_new_turtle_enviroment()
     TurtleLand.title("" + name + "'s Fractal!")
     t.pen(pencolor=color)
+    t.speed("fastest")
     koch_instructions = create_LSystem(4, "F")
-    print("Fractals can be iterated as many times as you choose, but for now we'll"
-    " set it at 4 iterations.")
+    print("Fractals can be iterated as many times as you choose, but for now we'll" + "\n" +
+    "set it at 4 iterations.")
     koch_angle = input("Type in an angle between 50 and 100 for our koch fractal: ")
-    koch_length = input("Now type in a length between 1 and 30 for your lines: ")
+    koch_length = input("Now type in a length between 10 and 30 for your lines: ")
     print(after_instructions)
     draw_LSystem(t, koch_instructions, int(koch_angle), int(koch_length))   # draw the picture at (angle 60, length 5)
-    print("What you saw was a Koch fractal iterated over four times, with an angle"
-    " of {} and a length {}.").format(koch_angle,koch_length)
+    print("What you saw was a Koch fractal iterated over four times, with an angle" + "\n" +
+    "of {} and a length {}.").format(koch_angle,koch_length)
 
 
-    print("Now lets try to do a Sierpinski Triangle fractal! In this case, you'll"
-    " be choosing how many iterations you want instead of the angle.")
-    sierpinski_iterations = input("Type in how many times you want to iterate over (between 2 and 6) ")
-    sierpinski_length = input("Now type in the length you want each line to be (between 5 and 10) ")
+    print("Now lets try to do a Sierpinski Triangle fractal! In this case, you'll" + "\n" +
+    "be choosing how many iterations you want instead of the angle.")
+    sierpinski_iterations = input("Type in how many times you want to iterate over (between 2 and 6): ")
+    sierpinski_length = input("Now type in the length you want each line to be (between 5 and 10): ")
     create_new_turtle_enviroment()
     t.reset()
+    t.speed("fastest")
+    t.pen(pencolor=color)
+    t.penup()
     t.setposition(-500,0)
+    t.pendown()
     print(after_instructions)
     sierpinski_instructions = create_LSystem(sierpinski_iterations, "S+M+M")
     draw_LSystem(t, sierpinski_instructions, 120, sierpinski_length)
 
 
-    print("Great! Lastly we'll be doing a fractal plant where you can chose to "
-    "iterate as many times as you want, specifying the angele and length of each"
+    print("Great! Lastly we'll be doing a fractal plant where you can chose to" + "\n" +
+    "iterate as many times as you want, specifying the angele and length of each" + "\n" +
     "line.")
-    fractal_plant_iterations = 
-    fractal_plant_angle =
-
+    fractal_plant_iterations = input("Type in how many times you want to iterate this fractal plant over: ")
+    fractal_plant_angle = input("Now type in an angle for your fractal plant: ")
+    fractal_plant_length = input("Lastly, type in the length you want your plant to start off with: ")
+    t.reset()
+    t.pen(pencolor=color)
+    t.penup()
+    t.setposition(-500,0)
+    t.left(40)
+    t.pendown()
+    t.speed("fastest")
+    print(after_instructions)
+    fractal_plant_instructions = create_LSystem(fractal_plant_iterations, 'C')
+    draw_LSystem(t, fractal_plant_instructions, fractal_plant_angle, fractal_plant_length)
+    print("Good job " + name + ". Now you're ready to create your own fractals!"
+    "To create your own fractal, you first should start off with a base case axiom." + "\n" +
+    "For example, the Sierpinski Triangle base case is S+M+M where both 'S' and 'M'" + "\n" +
+    "mean draw forward, '+' means turn right by some angle and '-' means . Next," + "\n" +
+    "apply some rules to" )
+    #rule = S > S+M-S-M+S , M > MM
+    #axiom = S+M+M
 
 
 #print("These are the instructions being iterated over" + "\n" + inst)

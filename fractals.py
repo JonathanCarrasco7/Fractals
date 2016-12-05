@@ -1,85 +1,191 @@
 import turtle
 
-D = 90 #Turning Angle
-L = 10 #Line Length
+class Jonathans_Fractal_Project(turtle.RawTurtle):
+    def __init__(self, canvas):
+        t = turtle.RawTurtle
+        t.speed("fastest")
+        t.penup()
+        t.back(500)
+        t.pendown()
+        turtle.RawTurtle.__init__(self, canvas)
+        turlte.RawTurtle
+        self.tbox = [0,0,0,0]
 
-def iterate(axiom, num=0, initator='F'):
+    def update_tbox(self):
+        pos = self.position()
+        if pos[0] < self.tbox[0]:
+            self.tbox[0] = pos[0]
+        elif pos[0] > self.tbox[2]:
+            self.tbox[2] = pos[0]
+        if pos[1] < self.tbox[1]:
+            self.tbox[1] = pos[1]
+        elif pos[1] > self.tbox[3]:
+            self.tbox[3] = pos[1]
+
+    def t_forward(self, *args):
+        t.forward(self, *args)
+        self.update_tbox()
+
+    def t_backward(self, *args):
+        t.backward(self, *args)
+        self._update_tbox()
+
+    def t_right(self, *args):
+        t.right(self, *args)
+        self._update_tbox()
+
+    def t_left(self, *args):
+        t.left(self, *args)
+        self._update_tbox()
+
+    def t_goto(self, *args):
+        t.goto(self, *args)
+        self._update_tbox()
+
+    def t_setheading(self, *args):
+        t.setheading(self, *args)
+        self._update_bbox()
+
+canvs = turtle.ScrolledCanvas(root)
+screen = turtle.TurtleScreen(cv)
+TurtleLand = Jonathans_Fractal_Project(screen)
+TurtleLand.onkey(TurtleLand.bye, 'q')
+TurtleLand.listen()
+
+def create_LSystem(self, Iterations, axiom):
     """
-    Compute turtle rule string by iterating on an axiom
+    Creates an L-System using the axioms provided and Iterates over this L-System
+    "Iterations-times" (n-times).
     For a Koch Fractal:
-    axiom = "F-F++F-F"
-    axiom = iterate(axiom, 3, "F")
-    draw(axiom, 60, 10)
-    For Other fractal:
-    axiom = "F[+F]F[-F]F"
-    axiom = iterate(axiom, 3, "F")
-    draw(axiom, 60, 10)
+    rule = F > F-F++F-F
+    axiom = F
+
+    For a Sierpinski Triangle:
+    rule = S > S+M-S-M+S , M > MM
+    axiom = S+M+M
+
+    For a Fractal Plant:
+    rule = X > M-[[X]+X]+M[+MX]-X, M > MM
+    axiom = X
+
+    For every code:
+    fractal = create_LSystem(Iterations, "axiom")
+    draw_LSystem(t, fractal, angle, distance)
+    #angle must be 120 for Sierpinski Triangle
     """
 
-    def translate(current, axiom):
-        """
-        Translate all the "F" with the axiom for current string
-        """
-        result = ""
-        consts = {'+', '-', '[', ']'}
-        for c in current:
-            if c in consts:
-                result += c
-                continue
-                if c == 'F':
-                    result += axiom
-        return result
+    starting_string = axiom
+    end_string = ""
+    for i in range(Iterations):
+        end_string = process_string(starting_string)
+        starting_string = end_string
+    return end_string
 
-        # Sets initator
-        result = initator
-        for i in xrange(0, num): # Translates the rule string for each iteration
-            result = translate(result, axiom)
-        return result
-
-def draw(axiom, d=D, l=L):
+def process_string(old_string):
     """
-    Uses turtle to draw the L-System
+    Applies apply_rules to every character in the old_string and returns the
+    new_string.
     """
-    stack  = []                 # Tracks the turtle's position
-    screen = turtle.Screen()
-    Jonathan = turtle.Turtle()
-    Jonathan.hideturtle()           # Doesn't show the turtle
-    Jonathan.speed("faster")
-    Jonathan.left(90)               # Points upwards instead of rightwards
 
-    for i in xrange(len(axiom)):
-        c = axiom[i]
+    new_string = ""
+    for character in old_string:
+        new_string = new_string + follow_rules(character)
 
-        if c == 'F':
-            Jonathan.forward(l)
+    return new_string
 
-        if c == 'f':
-            Jonathan.penup()
-            Jonathan.forward(l)
-            Jonathan.pendown()
+def follow_rules(character):
+    """
+    Applies each rule of the given axiom to each character given in old_string.
+    """
 
-        if c == '+':
-            Jonathan.left(d)
+    rule = ""
+    if character == 'F':
+        rule = 'F-F++F-F'
+    elif character == 'S':
+        rule = 'S+M-S-M+S'
+    elif character == 'M':
+        rule = 'MM'
+    elif character == 'X':
+        rule = 'M-[[X]+X]+M[+MX]-X'
+    else:
+        rule = character
 
-        if c == '-':
-            Jonathan.right(d)
+    return rule
 
-        if c == '[':
+def draw_LSystem(Jonathan, instructions, angle, distance):
+    """
+    Makes Jonathan draw the L-System using turtle and the instructions given.
+    """
+    stack  = []
+
+    for command in instructions:
+        if command == 'F' or command == 'M' or command == 'S' or command == 'P':
+            Jonathan.forward(distance)
+        elif command == 'B':
+            Jonathan.backward(distance)
+        elif command == 'X':
+            Jonathan.left(360)
+        elif command == '+':
+            Jonathan.right(angle)
+        elif command == '-':
+            Jonathan.left(angle)
+        elif command == '[':
             stack.append((Jonathan.heading(), Jonathan.pos()))
-
-        if c == ']':
+        elif command == ']':
             heading, position = stack.pop()
             Jonathan.penup()
             Jonathan.goto(position)
             Jonathan.setheading(heading)
             Jonathan.pendown()
 
-    screen.onkey(screen.bye, 'q')
-    screen.listen()
-    turtle.mainloop()
+def main():
+    """
+    The main function being passed as an example.
+    """
+    after_instructions = "Now click on the other window to view your Koch fractal being made!"
 
-if __name__ == '__main__':
+    print("Hello! Welcome to the world of fractals!")
+    # name = '"{0}"'.format(input("What's your name? ")) #have to type in a string for some reason
+    # color = '"{0}"'.format(input("Hello "+ name +" .What's your favorite color? "))
+    name = input("What's your name? ")
+    color = input("Hello "+ name +". What's your favorite color? ")
+    print("Sweet! The interesting thing about fractals is that they use recursion,"
+    " just as our hw5 did." + "\n" + "Here's an example of a fractal called a koch fractal,"
+    " named after the Swedish Mathematician Helge von Koch.")
+    create_new_turtle_enviroment()
+    TurtleLand.title("" + name + "'s Fractal!")
+    t.pen(pencolor=color)
+    koch_instructions = create_LSystem(4, "F")
+    print("Fractals can be iterated as many times as you choose, but for now we'll"
+    " set it at 4 iterations.")
+    koch_angle = input("Type in an angle between 50 and 100 for our koch fractal: ")
+    koch_length = input("Now type in a length between 1 and 30 for your lines: ")
+    print(after_instructions)
+    draw_LSystem(t, koch_instructions, int(koch_angle), int(koch_length))   # draw the picture at (angle 60, length 5)
+    print("What you saw was a Koch fractal iterated over four times, with an angle"
+    " of {} and a length {}.").format(koch_angle,koch_length)
 
-    axiom = "F-F+F+FF-F-F+F"
-    axiom = iterate(axiom, 3, "F-F-F-F")
-    draw(axiom, 90, 2)
+    print("Now lets try to do a Sierpinski Triangle fractal! In this case, you'll"
+    " be choosing how many iterations you want instead of the angle.")
+    sierpinski_iterations = input("Type in how many times you want to iterate over (between 2 and 6): ")
+    sierpinski_length = input("Now type in the length you want each line to be (between 5 and 10): ")
+    create_new_turtle_enviroment()
+    t.reset()
+    t.setposition(-500,0)
+    print(after_instructions)
+    sierpinski_instructions = create_LSystem(sierpinski_iterations, "S+M+M")
+    draw_LSystem(t, sierpinski_instructions, 120, sierpinski_length)
+
+
+    print("Great! Lastly we'll be doing a fractal plant where you can chose to "
+    "iterate as many times as you want, specifying the angele and length of each"
+    "line.")
+    fractal_plant_iterations = input("Type in how many times you want to iterate this fractal plant over: ")
+    fractal_plant_angle = input("Now type in an angle for your fractal plant: ")
+    fractal_plant_length = input("Lastly, type in the length you want your plant to start off with: ")
+    print(after_instructions)
+    print("THAT WORKED TOO")
+
+    #print("These are the instructions being iterated over" + "\n" + inst)
+if __name__ == "__main__":
+    main()
