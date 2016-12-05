@@ -21,25 +21,34 @@ I will be using prior knowledge of fractals and more recently acquired knowledge
   of recursive functions. Additionally, I will possibly be using the same code I've written before on the Cantor set and Mandlebrot set and modify it so that it will take different arguments of size and iterations.
 
 ### External Libraries
-- Numba
 - Turtle
-- Matplotlib
-
 
 ### Milestones
 - L-systems paired with Turtle
-- Feature 2
-- ...
+- Recursion
+- Interaction
 
 
 ## Deliverables
 - A drawing Turtle
-- Possibly a mainuplative interface
-- ...
+- Possibly an interactive interface
 
 # Final Project Report
 *What you have achieved/learned*
+I learned more about inheritance and a built-in python function named "input()".
+I discovered L-Systems thanks to Julia and I know how to use turtle.Turtle().
+Additionally, I used a little bit of recursion for translating rules and creating
+L-systems.
 
 *What open questions remain*
+I know want to learn more about turtle.RawTurtle(), how else to draw fractals (for
+example, using pygame). and how, if possible, can I use my code to draw Mandlebrot
+Set fractals. Also, I'd like to know what other libraries I would need to draw a
+Mandlebrot Set fractal and I'm curious as to what differentiates L-System fractals
+from other fractals.
 
 ## Instructions to run the code
+$ from L_systems import *
+$ main()
+
+The rest of the code is explained as you run the program!
