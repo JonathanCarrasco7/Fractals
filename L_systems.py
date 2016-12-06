@@ -196,7 +196,7 @@ def main():
     "draw_LSystem(t, my_instructions, your assigned angle, your assigned length of line)")
     print(my_instructions)
 
-class L_System:
+class L_System():
     """
     L_System(axiom, rules)
     For a Koch Fractal:
@@ -224,9 +224,9 @@ class L_System:
         """ Evaluates each character in your axiom."""
 
         for character in self.axiom:
-            self.translate_character(character, iteration)
+            self.translate_character(character,iteration)
 
-    def translate_character(self, character, Iteration):
+    def translate_character(self, character, iteration):
         """ Recursively translates each character using the given rules. """
 
         if iteration <= 0 or character not in self.rules:
@@ -234,6 +234,14 @@ class L_System:
         else:
             for new_character in self.rules[character]:
                 self.translate_character(new_character, iteration-1)
+
+
+#Questions to ask:
+#my_instructions = L_System(axiom = ['C'], rules = {'C': [ 'M', '-', '[', '[', 'C', ']',
+#'+', 'C', ']', '+', 'M', '[', '+', 'M', 'C', ']', '-', 'C', ], 'M': ['M', 'M']})
+#x = L_System.translate(my_instructions, 7)
+#draw_LSystem(t,x,45,6)
+#None type?
 
 if __name__ == "__main__":
     main()
