@@ -28,17 +28,20 @@ I will be using prior knowledge of fractals and more recently acquired knowledge
 - Recursion
 - Interaction
 
-
 ## Deliverables
-- A drawing Turtle
-- Possibly an interactive interface
+- An interactive interface
+- A class that allows you to define your axiom and rules or
+- Two functions that let you create your own L-System fractal
+- Axioms and Rules for other fractals
+
 
 # Final Project Report
 *What you have achieved/learned*
 I learned more about inheritance and a built-in python function named "input()".
 I discovered L-Systems thanks to Julia and I know how to use turtle.Turtle().
 Additionally, I used a little bit of recursion for translating rules and creating
-L-systems.
+L-systems and now have a good understanding on how to use axioms and rules for
+creating fractals.
 
 *What open questions remain*
 I know want to learn more about turtle.RawTurtle(), how else to draw fractals (for
@@ -49,8 +52,12 @@ from other fractals.
 
 ## Instructions to run the code
 $ from L_systems import *
-$ main()
 The rest of the code is explained as you run the program!
 
 #Notes:
 Start up the interpreter with pythonw2.7 if you want to use python 2.7 (recommended)
+Type in 'main()' to run the tutorial again
+To create new instructions, type in create_LSystem() with number of iterations as
+your first argument and starting axiom as second argument.
+Then, draw your new fractal using draw_LSystem(t, new instructions, angle, distance).
+To reset the canvas, type in turtle.reset()

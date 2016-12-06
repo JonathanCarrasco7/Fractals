@@ -8,9 +8,6 @@ import turtle
 #Notes: Type name and color in strings if python 2.7 or less. elif, type just name and string.
 #Notes: Start up the interpreter with pythonw2.7 if you want to use python 2.7 (recommended)
 #use triple quotes for not having to use + ""\n" +
-"""
-How can i make pressing the enter key print a new line?
-"""
 t = turtle.Turtle()
 TurtleLand = turtle.Screen()
 
@@ -18,6 +15,18 @@ def create_LSystem(Iterations, axiom):
     """
     Creates an L-System using the axioms provided and Iterates over this L-System
     "Iterations-times" (n-times).
+
+    For a Koch Fractal:
+    axiom = F
+    rule = F > F-F++F-F
+
+    For a Sierpinski Triangle:
+    axiom = S+M+M
+    rules = S > S+M-S-M+S , M > MM
+
+    For a Fractal Plant:
+    axiom = C
+    rules = C > M-[[C]+C]+M[+MC]-C, M > MM
     For every code:
     fractal = create_LSystem(Iterations, "axiom")
     draw_LSystem(t, fractal, angle, distance)
@@ -100,7 +109,6 @@ def main():
     """The interactive part of the program."""
 
     after_instructions = "Now click on the other window to view your Koch fractal being made!"
-    my_instructions = L_System(axiom = ['C'], rules = {'C': [ 'M', '-', '[', '[', 'C', ']','+', 'C', ']', '+', 'M', '[', '+', 'M', 'C', ']', '-', 'C', ], 'M': ['M', 'M']})
 
     print("Hello! Welcome to the world of fractals!")
     # name = '"{0}"'.format(input("What's your name? ")) #have to type in a string for some reason
@@ -192,30 +200,22 @@ def main():
     "your own! Simply establish an axiom and rules using (in the case of our Fractal Plant):" + "\n" +
     "my_instructions = L_System(axiom = ['C'], rules = {'C': [ 'M', '-', '[', '[', 'C', ']'," + "\n" +
     "'+', 'C', ']', '+', 'M', '[', '+', 'M', 'C', ']', '-', 'C', ], 'M': ['M', 'M']})" + "\n" +
-    "and lastly, type this in to run your own fractal code!:" + "\n" +
-    "draw_LSystem(t, my_instructions, your assigned angle, your assigned length of line)")
-    print(my_instructions)
+    "or set my_instructions = create_LSystem(Iterations, axiom) and type this in to run your own fractal code!:" + "\n" +
+    "draw_LSystem(t, my_instructions, your assigned angle, your assigned length of line)." + "\n" +
+    "Great job "+ name+"! Type in 'main()' to run this tutorial again or get creative and make your own fractals!")
 
 class L_System():
     """
+    A class that takes your starting axiom and dictionary of rules, and returns
+    a string that works as instructions for draw_LSystem(t, instructions, andle, distance).
     L_System(axiom, rules)
-    For a Koch Fractal:
-    rule = F > F-F++F-F
-    axiom = F
-
-    For a Sierpinski Triangle:
-    rules = S > S+M-S-M+S , M > MM
-    axiom = S+M+M
-
-    For a Fractal Plant:
-    axiom = C
-    rules = C > M-[[C]+C]+M[+MC]-C, M > MM
+    See examples of axioms and rules in the uppermost docstring.
     """
     def __init__(self, axiom, rules):
         """
         Initiates each L_system with its axiom and given rules in this format:
-        axiom = [ S, +, M, +, M ],
-        rules = { S: [ S, +, M, -, S, -, M, +, S ], M: [ M, M ] }
+        axiom = [ 'S', '+', 'M', '+', 'M' ],
+        rules = { 'S': [ 'S', '+', 'M', '-', 'S', '-', 'M', '+', 'S' ], 'M': [ 'M', 'M' ] }
         """
         self.axiom = axiom
         self.rules = rules
@@ -228,20 +228,13 @@ class L_System():
 
     def translate_character(self, character, iteration):
         """ Recursively translates each character using the given rules. """
+        final_instructions = []
 
-        if iteration <= 0 or character not in self.rules:
-            character = character
-        else:
-            for new_character in self.rules[character]:
-                self.translate_character(new_character, iteration-1)
+        for keys in self.rules:
+            if iteration <= 0 or character not in self.rules:
+                character = character
+            else:
+                for new_character in self.rules[character]:
+                    self.translate_character(new_character, iteration-1)
 
-
-#Questions to ask:
-#my_instructions = L_System(axiom = ['C'], rules = {'C': [ 'M', '-', '[', '[', 'C', ']',
-#'+', 'C', ']', '+', 'M', '[', '+', 'M', 'C', ']', '-', 'C', ], 'M': ['M', 'M']})
-#x = L_System.translate(my_instructions, 7)
-#draw_LSystem(t,x,45,6)
-#None type?
-
-if __name__ == "__main__":
     main()
