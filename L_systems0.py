@@ -15,19 +15,40 @@ def create_LSystem(Iterations, axiom):
     """
     Creates an L-System using the axioms provided and Iterates over this L-System
     "Iterations-times" (n-times).
+
     For a Koch Fractal:
     axiom = F
+    For a Koch Curve:
+    axiom = F++F++F
     rule = F > F-F++F-F
+    #Try 60 < angle < 90 for a Cesaro fractal variant
+
     For a Sierpinski Triangle:
     axiom = S+M+M
     rules = S > S+M-S-M+S , M > MM
+    #angle must be 120
+
     For a Fractal Plant:
     axiom = C
     rules = C > M-[[C]+C]+M[+MC]-C, M > MM
+
+    For a Dragon Curve:
+    axiom = QW
+    rules = W > W+RQ+ , R > -QW-R
+    #angle is recommended to be 90
+
+    For a Sierpinski Arrowhead Curve:
+    axiom = A
+    rules = A > -D+A+D- , D > +A-D-A+
+    #angle must be 60
+
+    For a Pythagoras Tree:
+    axiom = O
+    rules = I > II , O > I<O>0
+
     For every code:
     fractal = create_LSystem(Iterations, "axiom")
     draw_LSystem(t, fractal, angle, distance)
-    #angle must be 120 for Sierpinski Triangle
     """
     starting_string = axiom
     end_string = ""
@@ -62,6 +83,18 @@ def apply_rules(character):
         rule = 'MM'
     elif character == 'C':
         rule = 'M-[[C]+C]+M[+MC]-C'
+    elif character == 'W':
+        rule = 'W+RQ+'
+    elif character == 'R':
+        rule = '-QW-R'
+    elif character == 'A':
+         rule = '-D+A+D-'
+    elif character == 'D':
+         rule = '+A-D-A+'
+    elif character == 'I':
+        rule = 'II'
+    elif character == '0'
+        rule = 'I<O>O'
     else:
         rule = character
 
@@ -72,12 +105,12 @@ def draw_LSystem(Jonathan, instructions, angle, distance):
     stack  = []
 
     for command in instructions:
-        if command == 'F' or command == 'M' or command == 'S' or command == 'P':
+        if command == 'F' or command == 'M' or command == 'S' or command == 'P' or command == 'Q' or command == 'D' or command == 'A' or command == 'I' or command == 'O':
             Jonathan.forward(distance)
         elif command == 'B':
             Jonathan.backward(distance)
         elif command == 'C':
-            Jonathan.left(360)
+            pass
         elif command == '+':
             Jonathan.right(angle)
         elif command == '-':
@@ -90,6 +123,17 @@ def draw_LSystem(Jonathan, instructions, angle, distance):
             Jonathan.goto(position)
             Jonathan.setheading(heading)
             Jonathan.pendown()
+        elif command == '<':
+            stack.append((Jonathan.heading(), Jonathan.pos()))
+            Jonathan.left(angle)
+        elif command == '>':
+            heading, position = stack.pop()
+            Jonathan.penup()
+            Jonathan.goto(position)
+            Jonathan.setheading(heading)
+            Jonathan.pendown()
+            Jonathan.left(angle)
+
 
 def create_new_turtle_enviroment():
     """Tried to assign each feature to my turtle. """
