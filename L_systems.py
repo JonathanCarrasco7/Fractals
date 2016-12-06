@@ -1,6 +1,12 @@
 import turtle
 
 # make this a class at some point
+#I tried using create_new_turtle_enviroment to assign all the listed states such
+#as the speed of the turtle and starting position of the turtle so that I don't
+#have to repeat code but I don't think Turtle supports this and making a class
+#wouldn't work as well. Insetead, I made t = turtle.Turtle() global.
+
+#NOTES: use triple quotes for not having to use + ""\n" +
 """
 Questions:
 How can I give each turtle the fastest speed and the pencolor name and all those
@@ -99,6 +105,7 @@ def create_new_turtle_enviroment():
     t.penup()
     t.setposition(-650,-300)
     t.pendown()
+    t.speed("fastest")
     TurtleLand.onkey(TurtleLand.bye, 'q')
     TurtleLand.listen()
 
@@ -106,6 +113,7 @@ def main():
     """The interactive part of the program."""
 
     after_instructions = "Now click on the other window to view your Koch fractal being made!"
+    my_instructions = L_System(axiom = ['C'], rules = {'C': [ 'M', '-', '[', '[', 'C', ']','+', 'C', ']', '+', 'M', '[', '+', 'M', 'C', ']', '-', 'C', ], 'M': ['M', 'M']})
 
     print("Hello! Welcome to the world of fractals!")
     # name = '"{0}"'.format(input("What's your name? ")) #have to type in a string for some reason
@@ -194,11 +202,12 @@ def main():
     "Pretty lengthy right? Thats why the fractal plant took longer to draw!" + "\n" +
     "Lastly, the '[' character simply saves your current position while ']' takes" + "\n" +
     "you back to that position. Now that you know how fractals work, you can create" + "\n" +
-    "your own! Simply establish an axiom and rules using (in the case of our Fractal Plant:)" + "\n" +
-    "instructions = L_system.L_system(axiom = [C], rules = {C: [ M, -, [, [, C, ]," + "\n" +
-    "+, C, ], +, M, [, +, M, C, ], -, C, ],M: [M, M]})" + "\n" +
+    "your own! Simply establish an axiom and rules using (in the case of our Fractal Plant):" + "\n" +
+    "my_instructions = L_System(axiom = ['C'], rules = {'C': [ 'M', '-', '[', '[', 'C', ']'," + "\n" +
+    "'+', 'C', ']', '+', 'M', '[', '+', 'M', 'C', ']', '-', 'C', ], 'M': ['M', 'M']})" + "\n" +
     "and lastly, type this in to run your own fractal code!:" + "\n" +
-    "draw_LSystem("+ name +", instructions, angle, length of line)")
+    "draw_LSystem(t, my_instructions, your assigned angle, your assigned length of line)")
+    print(my_instructions)
 
 class L_System:
     """
