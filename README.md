@@ -50,8 +50,7 @@ from other fractals.
 ## Instructions to run the code
 $ from L_systems import *
 $ main()
+The rest of the code is explained as you run the program!
 
 #Notes:
 Start up the interpreter with pythonw2.7 if you want to use python 2.7 (recommended)
-
-The rest of the code is explained as you run the program!
