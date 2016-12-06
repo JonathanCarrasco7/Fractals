@@ -1,27 +1,14 @@
 import turtle
 
-# make this a class at some point
 #I tried using create_new_turtle_enviroment to assign all the listed states such
 #as the speed of the turtle and starting position of the turtle so that I don't
 #have to repeat code but I don't think Turtle supports this and making a class
 #wouldn't work as well. Insetead, I made t = turtle.Turtle() global.
 
-#NOTES: use triple quotes for not having to use + ""\n" +
+#Notes: Type name and color in strings if python 2.7 or less. elif, type just name and string.
+#Notes: Start up the interpreter with pythonw2.7 if you want to use python 2.7 (recommended)
+#use triple quotes for not having to use + ""\n" +
 """
-Questions:
-How can I give each turtle the fastest speed and the pencolor name and all those
-other features for each given turtle? Can I use create_new_turtle_enviroment() or
-do I have to create a class.
-
-Do I have to create a third Class Character or can I do what I needed to do without
-creating the new class.
-
-Can I type in the name without writing it in "string" format? or is it just cuz
-I'm using python 2.7?
-
-inst = create_LSystem(4, "C")
-print(inst)?
-
 How can i make pressing the enter key print a new line?
 """
 t = turtle.Turtle()
