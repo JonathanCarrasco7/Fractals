@@ -7,7 +7,6 @@ import turtle
 
 #Notes: Type name and color in strings if python 2.7 or less. elif, type just name and string.
 #Notes: Start up the interpreter with pythonw2.7 if you want to use python 2.7 (recommended)
-#use triple quotes for not having to use + ""\n" +
 t = turtle.Turtle()
 TurtleLand = turtle.Screen()
 

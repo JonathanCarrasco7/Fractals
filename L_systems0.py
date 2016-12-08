@@ -22,6 +22,9 @@ def create_LSystem(Iterations, axiom):
     axiom = F++F++F
     rule = F > F-F++F-F
     #Try 60 < angle < 90 for a Cesaro fractal variant
+    For a different Koch Curve (I think the other one doesn't work for certain angles)
+    axiom = E
+    rules = E > E-E+E+E-E
 
     For a Sierpinski Triangle:
     axiom = S+M+M
@@ -31,6 +34,11 @@ def create_LSystem(Iterations, axiom):
     For a Fractal Plant:
     axiom = C
     rules = C > M-[[C]+C]+M[+MC]-C, M > MM
+
+    For a Gosper Curve:
+    axiom = H
+    rules = H > H+J++J-H--HH-J+ , J > -H+JJ++H--H-J
+    # angle must be 60
 
     For a Dragon Curve:
     axiom = QW
@@ -45,6 +53,11 @@ def create_LSystem(Iterations, axiom):
     For a Pythagoras Tree:
     axiom = O
     rules = I > II , O > I<O>0
+
+    For a Moore Curve:
+    axiom = LNL-N-LNL
+    rules = L > +KN-LNL-NK+ , K > -LN+KNK+NL-
+    #angle must be 90?
 
     For every code:
     fractal = create_LSystem(Iterations, "axiom")
@@ -93,8 +106,18 @@ def apply_rules(character):
          rule = '+A-D-A+'
     elif character == 'I':
         rule = 'II'
-    elif character == '0'
+    elif character == '0':
         rule = 'I<O>O'
+    elif character == 'L':
+        rule = '+KN-LNL-NK+'
+    elif character == 'K':
+        rule = '-LN+KNK+NL-'
+    elif character == 'H':
+        rule = 'H+J++J-H--HH-J+'
+    elif character == 'J':
+        rule = '-H+JJ++H--H-J'
+    elif character == 'E':
+        rule = 'E-E+E+E-E'
     else:
         rule = character
 
@@ -105,11 +128,14 @@ def draw_LSystem(Jonathan, instructions, angle, distance):
     stack  = []
 
     for command in instructions:
-        if command == 'F' or command == 'M' or command == 'S' or command == 'P' or command == 'Q' or command == 'D' or command == 'A' or command == 'I' or command == 'O':
+        if command == 'F' or command == 'M' or command == 'S' or command == 'P' \
+        or command == 'Q' or command == 'D' or command == 'A' or command == 'I' \
+        or command == 'O' or command == 'H' or command == 'J' or command == 'H' \
+        or command == 'N' or command == 'E':
             Jonathan.forward(distance)
         elif command == 'B':
             Jonathan.backward(distance)
-        elif command == 'C':
+        elif command == 'C' or command == 'L' or command == 'K':
             pass
         elif command == '+':
             Jonathan.right(angle)
@@ -134,7 +160,6 @@ def draw_LSystem(Jonathan, instructions, angle, distance):
             Jonathan.pendown()
             Jonathan.left(angle)
 
-
 def create_new_turtle_enviroment():
     """Tried to assign each feature to my turtle. """
 
@@ -145,6 +170,18 @@ def create_new_turtle_enviroment():
     t.speed("fastest")
     TurtleLand.onkey(TurtleLand.bye, 'q')
     TurtleLand.listen()
+
+def cantor(x, y, length, height):
+    if len(range(length)) >= 1:
+        t.speed(0)
+        t.pensize(2)
+        t.penup()
+        t.goto(x,y)
+        t.pendown()
+        t.forward(length)
+        y -= height
+        cantor(x,y,length/3, height)
+        cantor( x+length*2/3, y, length/3, height)
 
 def main():
     """The interactive part of the program."""
@@ -277,5 +314,3 @@ class L_System():
             else:
                 for new_character in self.rules[character]:
                     self.translate_character(new_character, iteration-1)
-
-    main()
