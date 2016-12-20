@@ -61,3 +61,28 @@ To create new instructions, type in create_LSystem() with number of iterations a
 your first argument and starting axiom as second argument.
 Then, draw your new fractal using draw_LSystem(t, new instructions, angle, distance).
 To reset the canvas, type in turtle.reset()
+
+---
+
+# Final Project Grading
+
+## Functionality 10/10
+
+Impressive:  I loved that you wrote an L-system interpreter and connected it to the Turtle package.
+
+## Challenge and Endurance 9/10
+
+This was a challenging project and I know that you ran up against some obstacles but overcame them with
+the L-Systems.
+
+## Code Quality 6/10
+
+Here's where I thought you struggled the most.  The code was not well-organized and lacked lots of basic
+structure.  In particular, the long interactive threads with string after embedded string was not handled well.
+It would have been better to put this in a separate file and imported it.  Or a text file and read it in.
+
+## Final Product 9/10
+
+Beautiful fractals, drawn before our eyes!  Lovely!
+
+Overall: 44/50

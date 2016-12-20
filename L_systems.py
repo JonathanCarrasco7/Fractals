@@ -109,7 +109,7 @@ def main():
     print("Hello! Welcome to the world of fractals!")
     # name = '"{0}"'.format(input("What's your name? ")) #have to type in a string for some reason
     # color = '"{0}"'.format(input("Hello "+ name +" .What's your favorite color? "))
-    name = input("What's your name? ")
+    name = input("What's your name?  ")
     color = input("Hello "+ name +". What's your favorite color? ")
     print("Sweet! The interesting thing about fractals is that they use recursion," + "\n" +
     "just as our hw5 did. Here's an example of a fractal called a koch fractal," + "\n" +
